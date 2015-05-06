@@ -1,5 +1,6 @@
 require('spec_helper')
 
+
 describe(Author) do
 
   describe('#name') do
@@ -17,13 +18,13 @@ describe(Author) do
   end
 
   describe('.all') do
-    it('initially has no authors')
+    it('initially has no authors') do
       expect(Author.all()).to(eq([]))
     end
   end
 
   describe('.find') do
-    it('returns an author by its id')
+    it('returns an author by its id') do
       author_1 = Author.new({:name => 'Lermontov', :id => nil})
       author_1.save()
       author_2 = Author.new({:name => 'Pushkin', :id => nil})
@@ -35,7 +36,7 @@ describe(Author) do
   describe('#==') do
     it('is the same author if it has the same name and id') do
       author_1 = Author.new({:name => 'Lermontov', :id => nil})
-      author_2 = Author.new({:name => 'Pushkin', :id => nil})
+      author_2 = Author.new({:name => 'Lermontov', :id => nil})
       expect(author_1).to(eq(author_2))
     end
   end
@@ -58,3 +59,5 @@ describe(Author) do
       expect(Author.all()).to(eq(author_2))
     end
   end
+
+end

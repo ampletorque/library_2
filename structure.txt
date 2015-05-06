@@ -1,20 +1,33 @@
 SCHEMA
   TABLES
     authors
+      id
+      name
     titles
+      id
+      name
     items
-       due dates/overdue books
-  patrons
-     checkouts-checkins indexed array
+      id
+      latest_transaction_id
+    transactions
+      id
+      check-in/check-out
+      transaction timestamp
+      due-date (set to 2 weeks from transaction date or nil)
+    patrons
+      id
+      name
   JOINS
     authors_titles
-    titles_item_ids
-    patrons_item_ids
+    items_titles
+    items_transactions
+    items_patrons
+    patrons_transactions
 
 PROGRAM
   Author
      #titles
-     #all authors list
+     .all authors list
      #author info + all titles by author list
      #create_new
      #add_title
@@ -23,7 +36,7 @@ PROGRAM
   Title
      #authors
      #items
-     #all titles list
+     .all titles list
      #title info + all authors for title list
      #create_new
      #add_author
@@ -38,13 +51,13 @@ PROGRAM
      #check_in
      #remove_item
   Patron
+     .all patrons list
      #create_new
      #change_name
      #remove_patron
      #checkout_history
      #overdue
      #due_dates
-
 VIEWS
   index
     librarian
@@ -76,18 +89,18 @@ VIEWS
         check in book
         view history of my checked-out books
         check due date of my currently checked-out books
-
-later:
-use join statements instead of join tables
-select fields added to forms
-date pickers added to forms
-navigation/navbar, headers, and footers added to layout.erb
-images added for titles & authors
-style using bootstrap
-add url link for books in google-books or gutenberg project
-automatically add book by url
-automatically import pictures for books and authors?
-add audiobooks and recordings and type-of-item
-add publisher
-change to standard ruby syntax (no define_methods, etc)
-create schema automatically (activerecord?)
+LATER
+  use join statements instead of join tables
+  select fields added to forms
+  date pickers added to forms
+  navigation/navbar, headers, and footers added to layout.erb
+  images added for titles & authors
+  style using bootstrap
+  add url link for books in google-books or gutenberg project
+  automatically add book by url
+  automatically import pictures for books and authors?
+  add audiobooks and recordings and type-of-item
+  add publisher
+  change to standard ruby syntax (no define_methods, etc)
+  create schema automatically (activerecord?)
+  make app "helper" class/file that has most common methods with table parameters

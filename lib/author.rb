@@ -7,7 +7,7 @@ class Author
     @id = attributes.fetch(:id)
   end
 
-  define_singleton(method(:all)) do
+  define_singleton_method(:all) do
     returned_authors = DB.exec('SELECT * FROM authors;')
     authors = []
     returned_authors.each() do |author|
@@ -31,5 +31,17 @@ class Author
   end
 
   define_method(:==) do |an_author|
-    
+    self.name().==(an_author.name()).&(self.id().==(an_author.id()))
   end
+
+  define_method(:change_name) do |attributes|
+    @name = attributes.fetch(:name, @name)
+    @id = self.id()
+    DB.exec("UPDATE authors SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM authors WHERE id = #{self.id()};")
+  end
+
+end
