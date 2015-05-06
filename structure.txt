@@ -89,3 +89,5 @@ automatically add book by url
 automatically import pictures for books and authors?
 add audiobooks and recordings and type-of-item
 add publisher
+change to standard ruby syntax (no define_methods, etc)
+create schema automatically (activerecord?)
