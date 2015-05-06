@@ -1,4 +1,4 @@
-require('spec_helper')
+require('helper/spec_helper')
 
 describe(Patron) do
 
@@ -59,19 +59,19 @@ describe(Patron) do
       expect(Patron.all()).to(eq([patron_2]))
     end
   end
-  #
-  # describe('#checkouts') do
-  #   it('gives a full checkout history for a patron') do
-  #   end
-  #
-  #   it('shows overdue items for a patron') do
-  #   end
-  #
-  #   it('shows overdue items for all patrons') do
-  #   end
-  #
-  #   it('shows due dates for checked-out items for a patron') do
-  #   end
-  # end
+
+  describe('#checkouts') do
+    it('gives a full checkout history for a patron') do
+    end
+
+    it('shows overdue items for a patron') do
+    end
+
+    it('shows overdue items for all patrons') do
+    end
+
+    it('shows due dates for checked-out items for a patron') do
+    end
+  end
 
 end

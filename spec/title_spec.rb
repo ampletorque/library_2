@@ -1,5 +1,4 @@
-require('spec_helper')
-
+require('helper/spec_helper')
 
 describe(Title) do
 
