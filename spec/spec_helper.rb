@@ -11,10 +11,10 @@ DB = PG.connect({:dbname => "library_test"})
 
 RSpec.configure do |config|
   config.after(:each) do
-    DB.exec("DELTE FROM titles *;")
-    DB.exec("DELTE FROM authors *;")
-    DB.exec("DELTE FROM items *;")
-    DB.exec("DELTE FROM transactions *;")
-    DB.exec("DELTE FROM patrons *;")
+    DB.exec("DELETE FROM titles *;")
+    DB.exec("DELETE FROM authors *;")
+    DB.exec("DELETE FROM items *;")
+    DB.exec("DELETE FROM transactions *;")
+    DB.exec("DELETE FROM patrons *;")
   end
 end

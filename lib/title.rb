@@ -8,7 +8,7 @@ class Title
   end
 
   define_singleton_method(:all) do
-    returned_titles = DB.exec('SELECT * FROM actors;')
+    returned_titles = DB.exec("SELECT * FROM titles;")
     titles = []
     returned_titles.each() do |title|
       name = title.fetch('name')
@@ -20,7 +20,7 @@ class Title
 
   define_singleton_method(:find) do |id|
     @id = id
-    result = DB.exec("SELECT * FROM actors WHERE id = #{@id};")
+    result = DB.exec("SELECT * FROM titles WHERE id = #{@id};")
     @name = result.first().fetch('name')
     Title.new({:name => @name, :id => @id})
   end

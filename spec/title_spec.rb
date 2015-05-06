@@ -45,7 +45,7 @@ describe(Title) do
     it("lets you change a title name") do
       title_1 = Title.new({:name => 'A Hero of Our Time', :id => nil})
       title_1.save()
-      title_1.update({:name => 'Demon'})
+      title_1.change_name({:name => 'Demon'})
       expect(title_1.name()).to(eq('Demon'))
     end
   end
@@ -57,7 +57,7 @@ describe(Title) do
       title_2 = Title.new({:name => 'Demon', :id => nil})
       title_2.save()
       title_1.delete()
-      expect(Title.all()).to(eq(title_2))
+      expect(Title.all()).to(eq([title_2]))
     end
   end
 

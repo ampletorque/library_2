@@ -45,7 +45,7 @@ describe(Author) do
     it('lets you change an author name') do
       author_1 = Author.new({:name => 'Lermontov', :id => nil})
       author_1.save()
-      author.update({:name => 'Lermontov'})
+      author_1.change_name({:name => 'Lermontov'})
     end
   end
 
@@ -56,7 +56,7 @@ describe(Author) do
       author_2 = Author.new({:name => 'Pushkin', :id => nil})
       author_2.save()
       author_1.delete()
-      expect(Author.all()).to(eq(author_2))
+      expect(Author.all()).to(eq([author_2]))
     end
   end
 

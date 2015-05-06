@@ -4,13 +4,13 @@ class Item
 
   attr_reader(:id, :checkout)
 
-  define_method(:initalize) do |attributes|
+  define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
     @id = attributes.fetch(:id)
   end
 
   define_singleton_method(:all) do
-    returned_items = DB.exec('SELECT * FROM items;')
+    returned_items = DB.exec("SELECT * FROM items;")
     items = []
     returned_items.each() do |item|
       name = item.fetch('name')
@@ -22,13 +22,13 @@ class Item
 
   define_singleton_method(:find) do |id|
     @id = id
-    result = DB.exec('SELECT * FROM items WHERE id = #{@id};')
+    result = DB.exec("SELECT * FROM items WHERE id = #{@id};")
     @name = result.first().fetch('name')
     Author.new({:name => @name, :id => @id})
   end
 
   define_method(:save) do
-    result = DB.exec('INSERT INTO items (NAME) VALUES ("#{@name}") RETURNING id;')
+    result = DB.exec("INSERT INTO items (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch('id').to_i()
   end
 
