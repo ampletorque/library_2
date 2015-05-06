@@ -1,9 +1,0 @@
-tables:
-authors
-titles
- item_ids
-item_id
-patrons
- checkouts
-due dates
-overdue books

@@ -1,0 +1,91 @@
+SCHEMA
+  TABLES
+    authors
+    titles
+    items
+       due dates/overdue books
+  patrons
+     checkouts-checkins indexed array
+  JOINS
+    authors_titles
+    titles_item_ids
+    patrons_item_ids
+
+PROGRAM
+  Author
+     #titles
+     #all authors list
+     #author info + all titles by author list
+     #create_new
+     #add_title
+     #remove_title
+     #change_name
+  Title
+     #authors
+     #items
+     #all titles list
+     #title info + all authors for title list
+     #create_new
+     #add_author
+     #remove_author
+     #change_title
+  Item
+     #title
+     #is_checked_out
+     #checkout_history
+     #create_new
+     #check_out
+     #check_in
+     #remove_item
+  Patron
+     #create_new
+     #change_name
+     #remove_patron
+     #checkout_history
+     #overdue
+     #due_dates
+
+VIEWS
+  index
+    librarian
+      patron management
+        create patron
+        overdues list by patron with full information
+      book management
+        create books
+          create multiple authors
+          create multiple titles
+        title info/alter/update/delete
+        item info/alter/update/delete
+        author info/alter/update/delete
+        delete books
+        list books
+      search catalog
+        search author
+        search title
+    patron
+      search catalog
+        search author
+        search catalog
+        title info
+        author info
+        item info
+        check number of copies available for a title
+      checkouts
+        check out book
+        check in book
+        view history of my checked-out books
+        check due date of my currently checked-out books
+
+later:
+use join statements instead of join tables
+select fields added to forms
+date pickers added to forms
+navigation/navbar, headers, and footers added to layout.erb
+images added for titles & authors
+style using bootstrap
+add url link for books in google-books or gutenberg project
+automatically add book by url
+automatically import pictures for books and authors?
+add audiobooks and recordings and type-of-item
+add publisher
