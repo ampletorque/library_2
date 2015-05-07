@@ -4,7 +4,10 @@ class Patron
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-    @id = attributes.fetch(:id)
+#    @id = attributes.fetch(:id)
+    result = DB.exec("INSERT INTO patrons (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch('id').to_i()
+#    self.save
   end
 
   define_singleton_method(:all) do
@@ -44,8 +47,22 @@ class Patron
     DB.exec("DELETE FROM patrons WHERE id = #{self.id()};")
   end
 
-  define_method(:overdue) do
+
+  define_method(:check_out) do |item_id, due_days|
+    due_date = Time.new.to_date + due_days
+    Transaction.new({:in_out => false, :patron_id => self.id, :item_id => item_id, :time => Time.new.to_date, :due => due_date, :id => nil})
+    Transaction.save()
   end
+
+  define_method(:check_in) do |item_id|
+    Transaction.new({:in_out => true, :patron_id => self.id, :item_id => item_id, :time => Time.new.to_date, :due => nil, :id => nil})
+    Transaction.save()
+  end
+
+  define_method(:items_out) do
+
+  end
+
 
   define_method(:checkout_history) do
   end

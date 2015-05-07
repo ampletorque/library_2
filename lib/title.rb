@@ -4,7 +4,11 @@ class Title
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-    @id = attributes.fetch(:id)
+#    @id = attributes.fetch(:id)
+#    self.save
+    result = DB.exec("INSERT INTO titles (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first().fetch('id').to_i()
+
   end
 
   define_singleton_method(:all) do
@@ -42,6 +46,10 @@ class Title
 
   define_method(:delete) do
     DB.exec("DELETE FROM titles WHERE id = #{self.id()};")
+  end
+
+  define_method(:add_author) do |author_id|
+    DB.exec("INSERT INTO authors_titles (author_id, title_id) VALUES (#{@author_id}, #{@self_id})")
   end
 
 end

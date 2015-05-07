@@ -72,11 +72,13 @@ PROGRAM
     #initialize
     #change_name
     #delete
-    #checkouts_for_patron
+    #transaction_history
     #items_out_with_due_dates
       #overdue_items_out_with_due_dates
-    #check_out
-    #check_in
+    #check_in_out
+  Transaction
+    #initialize
+    #save
 
 VIEWS
   index
@@ -109,6 +111,8 @@ VIEWS
         check in book
         view history of my checked-out books
         check due date of my currently checked-out books
+DO NEXT
+
 LATER
   use join statements instead of join tables
   select fields added to forms
@@ -124,7 +128,6 @@ LATER
   change to standard ruby syntax (no define_methods, etc)
   create schema automatically (activerecord?)
   make app "helper" class/file that has most common methods with table parameters
-<<<<<<< HEAD
 
 database schema creation commands:
 CREATE DATABASE library;
@@ -140,5 +143,3 @@ CREATE TABLE items_transactions (item_id int, transaction_id int);
 CREATE TABLE items_patrons (item_id int, patron_id int);
 CREATE TABLE patrons_transactions (patron_id int, transaction_id int);
 CREATE DATABASE library_test WITH TEMPLATE library;
-=======
->>>>>>> d9577718e2a47dc4aa866f8f427b6d4a26a6be98
