@@ -44,7 +44,7 @@ class Patron
     DB.exec("DELETE FROM patrons WHERE id = #{self.id()};")
   end
 
-  define_method(:checkouts) do
+  define_method(:overdue) do
   end
 
   define_method(:checkout_history) do
