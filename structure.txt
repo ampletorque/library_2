@@ -1,0 +1,121 @@
+SCHEMA
+  TABLES
+    authors
+      id
+      name
+    titles
+      id
+      name
+    items
+      id
+      latest_transaction_id
+    transactions
+      id
+      check-in/check-out
+      transaction timestamp
+      due-date (set to 2 weeks from transaction date or nil)
+    patrons
+      id
+      name
+  JOINS
+    authors_titles
+    items_titles
+    items_transactions
+    items_patrons
+    patrons_transactions
+
+PROGRAM
+  Author
+     #titles
+     .all authors list
+     #author info + all titles by author list
+     #create_new
+     #add_title
+     #remove_title
+     #change_name
+  Title
+     #authors
+     #items
+     .all titles list
+     #title info + all authors for title list
+     #create_new
+     #add_author
+     #remove_author
+     #change_title
+  Item
+     #title
+     #is_checked_out
+     #checkout_history
+     #create_new
+     #check_out
+     #check_in
+     #remove_item
+  Patron
+     .all patrons list
+     #create_new
+     #change_name
+     #remove_patron
+     #checkout_history
+     #overdue
+     #due_dates
+VIEWS
+  index
+    librarian
+      patron management
+        create patron
+        overdues list by patron with full information
+      book management
+        create books
+          create multiple authors
+          create multiple titles
+        title info/alter/update/delete
+        item info/alter/update/delete
+        author info/alter/update/delete
+        delete books
+        list books
+      search catalog
+        search author
+        search title
+    patron
+      search catalog
+        search author
+        search catalog
+        title info
+        author info
+        item info
+        check number of copies available for a title
+      checkouts
+        check out book
+        check in book
+        view history of my checked-out books
+        check due date of my currently checked-out books
+LATER
+  use join statements instead of join tables
+  select fields added to forms
+  date pickers added to forms
+  navigation/navbar, headers, and footers added to layout.erb
+  images added for titles & authors
+  style using bootstrap
+  add url link for books in google-books or gutenberg project
+  automatically add book by url
+  automatically import pictures for books and authors?
+  add audiobooks and recordings and type-of-item
+  add publisher
+  change to standard ruby syntax (no define_methods, etc)
+  create schema automatically (activerecord?)
+  make app "helper" class/file that has most common methods with table parameters
+
+database schema creation commands:
+CREATE DATABASE library;
+\c library
+CREATE TABLE titles (id serial PRIMARY KEY, name varchar);
+CREATE TABLE authors (id serial PRIMARY KEY, name varchar);
+CREATE TABLE items (id serial PRIMARY KEY, latest_transaction_id int);
+CREATE TABLE transactions (id serial PRIMARY KEY, check_in_out boolean, date timestamp, due timestamp);
+CREATE TABLE patrons (id serial PRIMARY KEY, name varchar);
+CREATE TABLE authors_titles (author_id int, title_id int);
+CREATE TABLE items_titles (item_id int, title_id int);
+CREATE TABLE items_transactions (item_id int, transaction_id int);
+CREATE TABLE items_patrons (item_id int, patron_id int);
+CREATE TABLE patrons_transactions (patron_id int, transaction_id int);
+CREATE DATABASE library_test WITH TEMPLATE library;
