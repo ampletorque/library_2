@@ -60,17 +60,60 @@ describe(Patron) do
     end
   end
 
-  describe('#checkouts') do
-    it('gives a full checkout history for a patron') do
-    end
-
+  describe('#overdue') do
     it('shows overdue items for a patron') do
+      #returns array of item ids - all overdue
+      patron_1 = Patron.new({:name => 'Grigory Alexandrovich Pechorin', :id => nil})
+      patron_1.save()
+      author_1 = Author.new({:name => 'Lermontov', :id => nil})
+      author_1.save()
+      author_2 = Author.new({:name => 'Pushkin', :id => nil})
+      author_2.save()
+      title_1 = Title.new({:name => 'A Hero of Our Time', :id => nil})
+      title_1.save()
+      title_2 = Title.new({:name => 'Evgeny Onegin', :id => nil})
+      title_2.save()
+      title_1.add_author(Author.find(author_1.id()))
+      title_2.add_author(Author.find(author_2.id()))
+      item_1 = title_1.add_copy(Title.find(title_1.id()))
+      item_2 = title_2.add_copy(Title.find(title_2.id()))
+      transaction_1 = patron_1.check_out(current_date, auto_due_date)
+      transaction_2 = patron_1.check_out(current_date, auto_due_date)
+      expect(patron.checkouts(Patron.find(patron_1.id()))).to(eq())
     end
 
     it('shows overdue items for all patrons') do
+      #returns array of item ids - all overdue
+      patron_1 = Patron.new({:name => 'Grigory Alexandrovich Pechorin', :id => nil})
+      patron_1.save()
+      patron_2 = Patron.new({:name => 'Maxim Maxymich', :id => nil})
+      patron_2.save()
+      author_1 = Author.new({:name => 'Lermontov', :id => nil})
+      author_1.save()
+      author_2 = Author.new({:name => 'Pushkin', :id => nil})
+      author_2.save()
+      title_1 = Title.new({:name => 'A Hero of Our Time', :id => nil})
+      title_1.save()
+      title_2 = Title.new({:name => 'Evgeny Onegin', :id => nil})
+      title_2.save()
+      title_1.add_author(Author.find(author_1.id()))
+      title_2.add_author(Author.find(author_2.id()))
+      item_1 = title_1.add_copy(Title.find(title_1.id()))
+      item_2 = title_2.add_copy(Title.find(title_2.id()))
+      transaction_1 = patron_1.check_out(current_date, auto_due_date)
+      transaction_2 = patron_2.check_out(current_date, auto_due_date)
+      expect(patron.checkouts(nil)).to(eq())
     end
+    #
+    # it('shows due dates for checked-out items for a patron') do
+    #   #returns array of item ids - all checked out
+    #   expect(patron.checkouts(Patron.find(patron_1.id()), all))
+    # end
+  end
 
-    it('shows due dates for checked-out items for a patron') do
+  describe('#checkout_history') do
+    it('gives a full checkout history for a person') do
+      #returns array of transaction ids - all transactions
     end
   end
 

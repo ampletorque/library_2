@@ -47,4 +47,7 @@ class Patron
   define_method(:checkouts) do
   end
 
+  define_method(:checkout_history) do
+  end
+
 end
