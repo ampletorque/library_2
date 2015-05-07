@@ -26,38 +26,58 @@ SCHEMA
 
 PROGRAM
   Author
-     #titles
-     .all authors list
-     #author info + all titles by author list
-     #create_new
-     #add_title
-     #remove_title
-     #change_name
+    #id
+    #save
+    .find
+    #add_author
+    #initialize
+    .all
+    #==
+    #change_name
+    #delete
+    #remove_title
+    #name
+    #titles_for_author
   Title
-     #authors
-     #items
-     .all titles list
-     #title info + all authors for title list
-     #create_new
-     #add_author
-     #remove_author
-     #change_title
+    #id
+    #save
+    .find
+    #add_author
+    #initialize
+    .all
+    #==
+    #change_name
+    #delete
+    #remove_author
+    #name
+    #authors_for_title
+    #items_for_title
+    #add_item
+    #remove_item
   Item
-     #title
-     #is_checked_out
-     #checkout_history
-     #create_new
-     #check_out
-     #check_in
-     #remove_item
+    #id
+    #save
+    .find
+    #name
+    #is_checked_out?
+    #checkout_history
+    #initialize
+    #delete
   Patron
-     .all patrons list
-     #create_new
-     #change_name
-     #remove_patron
-     #checkout_history
-     #overdue
-     #due_dates
+    #id
+    #save
+    .find
+    #name
+    .all patrons list
+    #initialize
+    #change_name
+    #delete
+    #checkouts_for_patron
+    #items_out_with_due_dates
+      #overdue_items_out_with_due_dates
+    #check_out
+    #check_in
+
 VIEWS
   index
     librarian
@@ -104,6 +124,7 @@ LATER
   change to standard ruby syntax (no define_methods, etc)
   create schema automatically (activerecord?)
   make app "helper" class/file that has most common methods with table parameters
+<<<<<<< HEAD
 
 database schema creation commands:
 CREATE DATABASE library;
@@ -119,3 +140,5 @@ CREATE TABLE items_transactions (item_id int, transaction_id int);
 CREATE TABLE items_patrons (item_id int, patron_id int);
 CREATE TABLE patrons_transactions (patron_id int, transaction_id int);
 CREATE DATABASE library_test WITH TEMPLATE library;
+=======
+>>>>>>> d9577718e2a47dc4aa866f8f427b6d4a26a6be98
