@@ -4,10 +4,7 @@ class Patron
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-#    @id = attributes.fetch(:id)
-    result = DB.exec("INSERT INTO patrons (name) VALUES ('#{@name}') RETURNING id;")
-    @id = result.first().fetch('id').to_i()
-#    self.save
+    @id = attributes.fetch(:id)
   end
 
   define_singleton_method(:all) do
@@ -52,6 +49,7 @@ class Patron
     due_date = Time.new.to_date + due_days
     Transaction.new({:in_out => false, :patron_id => self.id, :item_id => item_id, :time => Time.new.to_date, :due => due_date, :id => nil})
     Transaction.save()
+#    result = DB.exec("INSERT INTO items (latest_transaction_id) VALUES ('#{@latest_transaction_id}') RETURNING id;")
   end
 
   define_method(:check_in) do |item_id|

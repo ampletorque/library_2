@@ -130,16 +130,26 @@ LATER
   make app "helper" class/file that has most common methods with table parameters
 
 database schema creation commands:
+
 CREATE DATABASE library;
 \c library
+
 CREATE TABLE titles (id serial PRIMARY KEY, name varchar);
 CREATE TABLE authors (id serial PRIMARY KEY, name varchar);
-CREATE TABLE items (id serial PRIMARY KEY, latest_transaction_id int);
-CREATE TABLE transactions (id serial PRIMARY KEY, check_in_out boolean, date timestamp, due timestamp);
+   #CREATE TABLE items (id serial PRIMARY KEY, latest_transaction_id int);
 CREATE TABLE patrons (id serial PRIMARY KEY, name varchar);
+
 CREATE TABLE authors_titles (author_id int, title_id int);
-CREATE TABLE items_titles (item_id int, title_id int);
+   #CREATE TABLE items_titles (item_id int, title_id int);
+
+CREATE TABLE transactions (id serial PRIMARY KEY, check_in_out boolean, date timestamp, due timestamp);
+
 CREATE TABLE items_transactions (item_id int, transaction_id int);
-CREATE TABLE items_patrons (item_id int, patron_id int);
+  #CREATE TABLE items_patrons (item_id int, patron_id int);
 CREATE TABLE patrons_transactions (patron_id int, transaction_id int);
+
 CREATE DATABASE library_test WITH TEMPLATE library;
+
+
+schema changes: replace 3 transaction join tables with transaction table containing current tables plus 2 connection id's
+                replace latest_transaction_id column in items with title_id

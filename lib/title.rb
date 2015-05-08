@@ -4,10 +4,7 @@ class Title
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-#    @id = attributes.fetch(:id)
-#    self.save
-    result = DB.exec("INSERT INTO titles (name) VALUES ('#{@name}') RETURNING id;")
-    @id = result.first().fetch('id').to_i()
+    @id = attributes.fetch(:id)
 
   end
 
@@ -49,7 +46,12 @@ class Title
   end
 
   define_method(:add_author) do |author_id|
-    DB.exec("INSERT INTO authors_titles (author_id, title_id) VALUES (#{@author_id}, #{@self_id})")
+    #binding.pry
+    DB.exec("INSERT INTO authors_titles (author_id, title_id) VALUES (#{author_id}, #{self.id})")
+  end
+
+  define_method(:add_copy) do |item_id|
+    DB.exec("INSERT INTO items_titles (item_id, title_id) VALUES (#{item_id}, #{self.id})")
   end
 
 end

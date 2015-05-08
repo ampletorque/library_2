@@ -8,13 +8,7 @@ class Transaction
     @item_id = attributes.fetch(:item)
     @time = attributes.fetch(:time)
     @due = attributes.fetch(:due)
-#    @id = attributes.fetch(:id)
-#    self.save
-result = DB.exec("INSERT INTO transactions (in_out, time, due) VALUES (#{@in_out}, #{@time}, #{@due}) RETURNING id;")
-    @id = result.first.fetch('id').to_i
-    DB.exec("INSERT INTO items_transactions (item_id, transaction_id) VALUES (#{@item_id}, #{@id});")
-    DB.exec("INSERT INTO items_patrons (item_id, patron_id) VALUES (#{@item_id},#{@patron_id});")
-    DB.exec("INSERT INTO patrons_transactions (patron_id, transaction_id) VALUES (#{@patron_id},#{@id});")
+    @id = attributes.fetch(:id)
 
   end
 
@@ -24,6 +18,7 @@ result = DB.exec("INSERT INTO transactions (in_out, time, due) VALUES (#{@in_out
     DB.exec("INSERT INTO items_transactions (item_id, transaction_id) VALUES (#{@item_id}, #{@id});")
     DB.exec("INSERT INTO items_patrons (item_id, patron_id) VALUES (#{@item_id},#{@patron_id});")
     DB.exec("INSERT INTO patrons_transactions (patron_id, transaction_id) VALUES (#{@patron_id},#{@id});")
+    result = DB.exec("UPDATE items SET latest_transaction_id = #{@latest_transaction_id} WHERE id = item_id;")
   end
 
 end

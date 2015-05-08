@@ -4,10 +4,7 @@ class Author
 
   define_method(:initialize) do |attributes|
     @name = attributes.fetch(:name)
-#    @id = attributes.fetch(:id)
-    result = DB.exec("INSERT INTO authors (NAME) VALUES ('#{@name}') RETURNING id;")
-    @id = result.first().fetch('id').to_i()
-#    self.save
+    @id = attributes.fetch(:id)
   end
 
   define_singleton_method(:all) do
